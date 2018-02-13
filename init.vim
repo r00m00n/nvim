@@ -4,19 +4,17 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'trevordmiller/nova-vim'
-Plug 'cloudhead/neovim-fuzzy'
 Plug 'pangloss/vim-javascript'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'wincent/command-t'
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'Quramy/tsuquyomi'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'leafgarland/typescript-vim'
+Plug 'flazz/vim-colorschemes'
 Plug 'mhartington/oceanic-next'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'Valloric/YouCompleteMe'
 " call PlugInstall to install new plugins
 call plug#end()
 
@@ -74,7 +72,7 @@ syntax enable
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 set background=dark
-colorscheme torte 
+colorscheme molokai_dark 
 
 "NERDTree
 " How can I close vim if the only window left open is a NERDTree?
