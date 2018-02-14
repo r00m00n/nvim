@@ -15,6 +15,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'mhartington/oceanic-next'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-fugitive'
 " call PlugInstall to install new plugins
 call plug#end()
 
@@ -60,6 +62,9 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 " plugin settings
 let g:deoplete#enable_at_startup = 1
+let g:ackprg = 'ag --vimgrep'
+let g:fzf_layout = { 'down': '~40%' }
+
 " use tab to forward cycle
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " use tab to backward cycle
