@@ -1,5 +1,6 @@
 call plug#begin('~/.config/nvim/bundle')
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-completion-manager'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'christoomey/vim-tmux-navigator'
@@ -17,6 +18,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
 " call PlugInstall to install new plugins
 call plug#end()
 
@@ -43,7 +45,10 @@ set pastetoggle=<F2>
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" Keymaps for plugins FZF and Ag
 nnoremap <C-p> :FZF<CR>
+nnoremap <C-o> :Ag<CR>
 " Stay in visual mode when indenting. You will never have to run gv after
 " performing an indentation.
 vnoremap < <gv
@@ -64,8 +69,8 @@ nnoremap <F8> :sbnext<CR>
 nnoremap <S-F8> :sbprevious<CR>
 
 " Tab switching movement
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
+nnoremap <C-S-Left> :tabprevious<CR>
+nnoremap <C-S-Right> :tabnext<CR>
 nnoremap <C-S-Up> :tabnew<CR>
 nnoremap <C-S-Down> :tabclose<CR>
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
