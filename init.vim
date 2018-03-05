@@ -17,8 +17,14 @@ Plug 'flazz/vim-colorschemes'
 Plug 'mhartington/oceanic-next'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'mileszs/ack.vim'
+
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'jreybert/vimagit'
+
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " call PlugInstall to install new plugins
 call plug#end()
 
@@ -84,6 +90,11 @@ let g:deoplete#enable_at_startup = 1
 let g:ackprg = 'ag --vimgrep'
 let g:fzf_layout = { 'down': '~40%' }
 
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_solarized_bg='dark'
+
 " use tab to forward cycle
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " use tab to backward cycle
@@ -96,7 +107,7 @@ syntax enable
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 set background=dark
-colorscheme molokai_dark 
+colorscheme oceanblack 
 
 "NERDTree
 " How can I close vim if the only window left open is a NERDTree?
@@ -121,3 +132,4 @@ let g:jsx_ext_required = 0
 "let g:ale_fix_on_save = 1
 "let g:ale_javascript_prettier_eslint_executable = 'prettier-eslint'
 "let g:ale_javascript_prettier_eslint_use_global = 1
+com! FormatJSON %!python -m json.tool
