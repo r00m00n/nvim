@@ -1,23 +1,26 @@
 call plug#begin('~/.config/nvim/bundle')
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'roxma/nvim-completion-manager'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
+Plug 'Quramy/tsuquyomi'
+Plug 'Quramy/vim-dtsm'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'trevordmiller/nova-vim'
-Plug 'pangloss/vim-javascript'
+Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Quramy/vim-js-pretty-template'
-Plug 'Quramy/tsuquyomi'
-Plug 'mxw/vim-jsx'
-Plug 'w0rp/ale'
 Plug 'leafgarland/typescript-vim'
-Plug 'flazz/vim-colorschemes'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'mattn/emmet-vim'
 Plug 'mhartington/oceanic-next'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'mileszs/ack.vim'
-
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'roxma/nvim-completion-manager'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'trevordmiller/nova-vim'
+Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
@@ -45,7 +48,8 @@ set expandtab
 set nobackup
 set noswapfile
 set nowrap
-
+set hlsearch
+set inccommand=nosplit
 " preferences
 inoremap jk <ESC>
 let mapleader = "\<Space>"
@@ -53,6 +57,11 @@ set pastetoggle=<F2>
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+nnoremap <Leader>gt :TsuTypeDefinition<CR>
+nnoremap <Leader>gd :TsuDefinition<CR>
+nnoremap <Leader>ai :TsuImport<CR>
+nnoremap <Leader>gi :TsuImplementation<CR>
 
 " Keymaps for plugins FZF and Ag
 nnoremap <C-p> :FZF<CR>
@@ -84,19 +93,25 @@ nnoremap <C-S-Down> :tabclose<CR>
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
+" fugitive specific
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gw :Gwrite<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gp :Gpush<CR>
 " change spacing for language specific
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 " plugin settings
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 let g:ackprg = 'ag --vimgrep'
 let g:fzf_layout = { 'down': '~40%' }
+let g:tsuquyomi_shortest_import_path = 1
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 let g:airline_solarized_bg='dark'
-let g:airline_theme='solarized'
+let g:airline_theme='jellybeans'
 
 " NERDCommenter 
 " Add spaces after comment delimiters by default
@@ -123,7 +138,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Theme
 syntax enable
-"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 set background=dark
 colorscheme oceanblack 
@@ -152,3 +167,5 @@ let g:jsx_ext_required = 0
 "let g:ale_javascript_prettier_eslint_executable = 'prettier-eslint'
 "let g:ale_javascript_prettier_eslint_use_global = 1
 com! FormatJSON %!python -m json.tool
+com! PrettyPrintHTML !tidy -mi -html -wrap 0 %
+com! PrettyPrintXML !tidy -mi -xml -wrap 0 %
