@@ -1,5 +1,6 @@
 call plug#begin('~/.config/nvim/bundle')
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'easymotion/vim-easymotion'
 Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vim-dtsm'
 Plug 'Quramy/vim-js-pretty-template'
