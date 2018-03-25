@@ -4,6 +4,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vim-dtsm'
 Plug 'Quramy/vim-js-pretty-template'
+"Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'flazz/vim-colorschemes'
@@ -26,6 +27,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
+Plug 'joshdick/onedark.vim'
 
 Plug 'pelodelfuego/vim-swoop'
 
@@ -112,7 +114,7 @@ let g:tsuquyomi_shortest_import_path = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 0
 let g:airline_solarized_bg='dark'
-let g:airline_theme='jellybeans'
+let g:airline_theme='onedark'
 
 " NERDCommenter 
 " Add spaces after comment delimiters by default
@@ -138,10 +140,10 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Theme
-syntax enable
+syntax on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set termguicolors
-set background=dark
+" set termguicolors
+" set background=dark
 colorscheme oceanblack 
 
 "NERDTree
