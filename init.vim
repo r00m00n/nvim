@@ -4,8 +4,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vim-dtsm'
 Plug 'Quramy/vim-js-pretty-template'
-"Plug 'OmniSharp/omnisharp-vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -69,6 +69,7 @@ nnoremap <Leader>gi :TsuImplementation<CR>
 " Keymaps for plugins FZF and Ag
 nnoremap <C-p> :FZF<CR>
 nnoremap <C-o> :Ag<CR>
+nnoremap <Leader>b :Buffers<CR>
 " Stay in visual mode when indenting. You will never have to run gv after
 " performing an indentation.
 vnoremap < <gv
@@ -83,6 +84,9 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 " Switching between buffers F8 and Shift F8
 set switchbuf=newtab
 nnoremap <F8> :sbnext<CR>
@@ -96,6 +100,8 @@ nnoremap <C-S-Down> :tabclose<CR>
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
+nnoremap <Leader>bp :bprevious<CR>
+nnoremap <Leader>bn :bnext<CR>
 " fugitive specific
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gw :Gwrite<CR>
@@ -142,8 +148,8 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " Theme
 syntax on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" set termguicolors
-" set background=dark
+set termguicolors
+set background=dark
 colorscheme oceanblack 
 
 "NERDTree
