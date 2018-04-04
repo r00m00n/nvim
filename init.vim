@@ -1,15 +1,19 @@
 call plug#begin('~/.config/nvim/bundle')
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'easymotion/vim-easymotion'
 Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vim-dtsm'
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'jiangmiao/auto-pairs'
+Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'easymotion/vim-easymotion'
 Plug 'flazz/vim-colorschemes'
+Plug 'jiangmiao/auto-pairs'
+Plug 'joshdick/onedark.vim'
+Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/gv.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'mattn/emmet-vim'
@@ -21,13 +25,10 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'roxma/nvim-completion-manager'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
 Plug 'trevordmiller/nova-vim'
 Plug 'w0rp/ale'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'jreybert/vimagit'
-Plug 'joshdick/onedark.vim'
 
 Plug 'pelodelfuego/vim-swoop'
 
@@ -53,10 +54,12 @@ set noswapfile
 set nowrap
 set hlsearch
 set inccommand=nosplit
+
 " preferences
 inoremap jk <ESC>
 let mapleader = "\<Space>"
 set pastetoggle=<F2>
+
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
@@ -67,9 +70,10 @@ nnoremap <Leader>ai :TsuImport<CR>
 nnoremap <Leader>gi :TsuImplementation<CR>
 
 " Keymaps for plugins FZF and Ag
-nnoremap <C-p> :FZF<CR>
+nnoremap <C-p> :GFiles<CR>
 nnoremap <C-o> :Ag<CR>
 nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>s :BLines<CR>
 " Stay in visual mode when indenting. You will never have to run gv after
 " performing an indentation.
 vnoremap < <gv
@@ -100,13 +104,17 @@ nnoremap <C-S-Down> :tabclose<CR>
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
+" buffer specific
 nnoremap <Leader>bp :bprevious<CR>
 nnoremap <Leader>bn :bnext<CR>
+nnoremap <Leader>bd :bdelete<CR>
+
 " fugitive specific
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gw :Gwrite<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gp :Gpush<CR>
+
 " change spacing for language specific
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
@@ -115,6 +123,10 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 let g:ackprg = 'ag --vimgrep'
 let g:fzf_layout = { 'down': '~40%' }
 let g:tsuquyomi_shortest_import_path = 1
+
+let g:ale_linters = {
+            \   'html': ['']
+            \}
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -140,8 +152,10 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " use tab to forward cycle
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
 " use tab to backward cycle
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+
 " Close the documentation window when completion is done
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
@@ -150,11 +164,12 @@ syntax on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 set background=dark
-colorscheme oceanblack 
+colorscheme darkocean 
 
 "NERDTree
 " How can I close vim if the only window left open is a NERDTree?
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 " toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeChDirMode=2
