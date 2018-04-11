@@ -1,5 +1,7 @@
 call plug#begin('~/.config/nvim/bundle')
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'OmniSharp/omnisharp-vim'
+Plug 'OrangeT/vim-csharp'
 Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vim-dtsm'
 Plug 'Quramy/vim-js-pretty-template'
@@ -27,6 +29,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
 Plug 'trevordmiller/nova-vim'
 Plug 'w0rp/ale'
 
@@ -60,9 +63,18 @@ inoremap jk <ESC>
 let mapleader = "\<Space>"
 set pastetoggle=<F2>
 
+filetype plugin on
+
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" Copy/Paste helpers
+nnoremap <Leader>d "_d
+nnoremap <Leader>x "_y
+nnoremap <Leader>c "+y
+nnoremap <Leader>P "+P
+nnoremap <Leader>p "+p
 
 nnoremap <Leader>gt :TsuTypeDefinition<CR>
 nnoremap <Leader>gd :TsuDefinition<CR>
@@ -164,7 +176,7 @@ syntax on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 set background=dark
-colorscheme darkocean 
+colorscheme blackboard 
 
 "NERDTree
 " How can I close vim if the only window left open is a NERDTree?
@@ -178,6 +190,7 @@ let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+let g:NERDTreeWinPos = "right"
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 
 " jsx
