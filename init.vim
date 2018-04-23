@@ -78,18 +78,18 @@ nnoremap <Leader>yy "+yy
 nnoremap <Leader>P "+P
 nnoremap <Leader>p "+p
 
-nnoremap <Leader>ai :TsuImport<CR>
-nnoremap <Leader>gt :TsuTypeDefinition<CR>
-nnoremap <Leader>gd :TsuDefinition<CR>
-nnoremap <Leader>gr :TsuReferences<CR>
-nnoremap <Leader>gi :TsuImplementation<CR>
-nnoremap <Leader>rr :TsuRenameSymbol<CR>
+nnoremap <Leader>tm :TsuImport<CR>
+nnoremap <Leader>tt :TsuTypeDefinition<CR>
+nnoremap <Leader>td :TsuDefinition<CR>
+nnoremap <Leader>tr :TsuReferences<CR>
+nnoremap <Leader>ti :TsuImplementation<CR>
+nnoremap <Leader>ts :TsuRenameSymbol<CR>
 
 " Keymaps for plugins FZF and Ag
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-o> :Ag<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>s :BLines<CR>
+nnoremap <Leader>bb :Buffers<CR>
+nnoremap <Leader>ss :BLines<CR>
 " Stay in visual mode when indenting. You will never have to run gv after
 " performing an indentation.
 vnoremap < <gv
@@ -211,5 +211,3 @@ let g:jsx_ext_required = 0
 "let g:ale_javascript_prettier_eslint_executable = 'prettier-eslint'
 "let g:ale_javascript_prettier_eslint_use_global = 1
 com! FormatJSON %!python -m json.tool
-com! PrettyPrintHTML !tidy -mi -html -wrap 0 %
-com! PrettyPrintXML !tidy -mi -xml -wrap 0 %
