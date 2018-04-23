@@ -19,7 +19,6 @@ Plug 'junegunn/gv.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'mattn/emmet-vim'
-Plug 'mhartington/oceanic-next'
 Plug 'mileszs/ack.vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
@@ -30,8 +29,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
 Plug 'trevordmiller/nova-vim'
 Plug 'w0rp/ale'
+Plug 'ayu-theme/ayu-vim'
 
 Plug 'pelodelfuego/vim-swoop'
 
@@ -71,15 +72,18 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " Copy/Paste helpers
 nnoremap <Leader>d "_d
-nnoremap <Leader>x "_y
-nnoremap <Leader>c "+y
+nnoremap <Leader>dd "_dd
+nnoremap <Leader>y "+y
+nnoremap <Leader>yy "+yy
 nnoremap <Leader>P "+P
 nnoremap <Leader>p "+p
 
+nnoremap <Leader>ai :TsuImport<CR>
 nnoremap <Leader>gt :TsuTypeDefinition<CR>
 nnoremap <Leader>gd :TsuDefinition<CR>
-nnoremap <Leader>ai :TsuImport<CR>
+nnoremap <Leader>gr :TsuReferences<CR>
 nnoremap <Leader>gi :TsuImplementation<CR>
+nnoremap <Leader>rr :TsuRenameSymbol<CR>
 
 " Keymaps for plugins FZF and Ag
 nnoremap <C-p> :GFiles<CR>
@@ -128,7 +132,7 @@ nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gp :Gpush<CR>
 
 " change spacing for language specific
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
 " plugin settings
 " let g:deoplete#enable_at_startup = 1
@@ -176,21 +180,24 @@ syntax on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 set background=dark
-colorscheme blackboard 
+let ayucolor="mirage" " for mirage version of theme
+colorscheme ayu
 
 "NERDTree
 " How can I close vim if the only window left open is a NERDTree?
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " toggle NERDTree
-map <C-n> :NERDTreeToggle<CR>
+map <Leader>nf :NERDTreeFind<CR>
+map <Leader>nn :NERDTree<CR>
+map <Leader>nt :NERDTreeToggle<CR>
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__', 'node_modules']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinPos = "left"
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 
 " jsx
