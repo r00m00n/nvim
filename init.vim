@@ -1,5 +1,5 @@
 call plug#begin('~/.config/nvim/bundle')
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'OmniSharp/omnisharp-vim'
 Plug 'OrangeT/vim-csharp'
 Plug 'Quramy/tsuquyomi'
@@ -16,6 +16,7 @@ Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
+Plug 'justinmk/vim-sneak'
 Plug 'leafgarland/typescript-vim'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'mattn/emmet-vim'
@@ -83,7 +84,7 @@ nnoremap <Leader>tt :TsuTypeDefinition<CR>
 nnoremap <Leader>td :TsuDefinition<CR>
 nnoremap <Leader>tr :TsuReferences<CR>
 nnoremap <Leader>ti :TsuImplementation<CR>
-nnoremap <Leader>ts :TsuRenameSymbol<CR>
+noremap <Leader>ts :TsuRenameSymbol<CR>
 
 " Keymaps for plugins FZF and Ag
 nnoremap <C-p> :GFiles<CR>
@@ -120,10 +121,12 @@ nnoremap <C-S-Down> :tabclose<CR>
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
+
 " buffer specific
 nnoremap <Leader>bp :bprevious<CR>
 nnoremap <Leader>bn :bnext<CR>
 nnoremap <Leader>bd :bdelete<CR>
+
 
 " fugitive specific
 nnoremap <Leader>gs :Gstatus<CR>
@@ -136,6 +139,7 @@ autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
 " plugin settings
 " let g:deoplete#enable_at_startup = 1
+" let g:python3_host_prog = 'C:\Python36\python.exe'
 let g:ackprg = 'ag --vimgrep'
 let g:fzf_layout = { 'down': '~40%' }
 let g:tsuquyomi_shortest_import_path = 1
@@ -180,8 +184,7 @@ syntax on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 set background=dark
-let ayucolor="mirage" " for mirage version of theme
-colorscheme ayu
+colorscheme onedark
 
 "NERDTree
 " How can I close vim if the only window left open is a NERDTree?
