@@ -1,6 +1,6 @@
 call plug#begin('~/.config/nvim/bundle')
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'OmniSharp/omnisharp-vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/denite.nvim'
 Plug 'OrangeT/vim-csharp'
 Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vim-dtsm'
@@ -20,11 +20,13 @@ Plug 'justinmk/vim-sneak'
 Plug 'leafgarland/typescript-vim'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'mattn/emmet-vim'
+Plug 'mhartington/nvim-typescript'
+Plug 'mhartington/oceanic-next'
 Plug 'mileszs/ack.vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'roxma/nvim-completion-manager'
+" Plug 'roxma/nvim-completion-manager'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
@@ -79,12 +81,12 @@ nnoremap <Leader>yy "+yy
 nnoremap <Leader>P "+P
 nnoremap <Leader>p "+p
 
-nnoremap <Leader>tm :TsuImport<CR>
-nnoremap <Leader>tt :TsuTypeDefinition<CR>
-nnoremap <Leader>td :TsuDefinition<CR>
-nnoremap <Leader>tr :TsuReferences<CR>
-nnoremap <Leader>ti :TsuImplementation<CR>
-noremap <Leader>ts :TsuRenameSymbol<CR>
+nnoremap <Leader>ti :TSImport<CR>
+nnoremap <Leader>tt :TSTypeDef<CR>
+nnoremap <Leader>td :TSDef<CR>
+nnoremap <Leader>tr :TSRefs<CR>
+nnoremap <Leader>to :TSGetDocSymbols<CR>
+nnoremap <Leader>ts :TSRename<CR>
 
 " Keymaps for plugins FZF and Ag
 nnoremap <C-p> :GFiles<CR>
