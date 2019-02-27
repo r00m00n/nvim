@@ -2,6 +2,7 @@ call plug#begin('~/.config/nvim/bundle')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/denite.nvim'
 Plug 'OrangeT/vim-csharp'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vim-dtsm'
 Plug 'Quramy/vim-js-pretty-template'
@@ -26,7 +27,6 @@ Plug 'mileszs/ack.vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-" Plug 'roxma/nvim-completion-manager'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
@@ -41,7 +41,6 @@ Plug 'pelodelfuego/vim-swoop'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" call PlugInstall to install new plugins
 call plug#end()
 
 " basics
@@ -80,6 +79,8 @@ nnoremap <Leader>y "+y
 nnoremap <Leader>yy "+yy
 nnoremap <Leader>P "+P
 nnoremap <Leader>p "+p
+inoremap fd <Esc>
+nnoremap <Leader>no :noh<CR>
 
 nnoremap <Leader>ti :TSImport<CR>
 nnoremap <Leader>tt :TSTypeDef<CR>
@@ -93,6 +94,7 @@ nnoremap <C-p> :GFiles<CR>
 nnoremap <C-o> :Ag<CR>
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader>ss :BLines<CR>
+nnoremap <Leader>fs :w<CR>
 " Stay in visual mode when indenting. You will never have to run gv after
 " performing an indentation.
 vnoremap < <gv
@@ -123,12 +125,10 @@ nnoremap <C-S-Down> :tabclose<CR>
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
-
 " buffer specific
 nnoremap <Leader>bp :bprevious<CR>
 nnoremap <Leader>bn :bnext<CR>
 nnoremap <Leader>bd :bdelete<CR>
-
 
 " fugitive specific
 nnoremap <Leader>gs :Gstatus<CR>
@@ -147,8 +147,47 @@ let g:fzf_layout = { 'down': '~40%' }
 let g:tsuquyomi_shortest_import_path = 1
 
 let g:ale_linters = {
-            \   'html': ['']
             \}
+
+" w0rp/ale
+" Limit linters used for JavaScript.
+let g:ale_linters = {
+\  'javascript': ['flow', 'eslint'],
+\  'typescript': ['tslint'],
+\  'html': ['']
+\}
+highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+let g:ale_sign_error = 'X' " could use emoji
+let g:ale_sign_warning = '?' " could use emoji
+let g:ale_statusline_format = ['X %d', '? %d', '']
+" %linter% is the name of the linter that provided the message
+" %s is the error or warning message
+let g:ale_echo_msg_format = '%linter%: %s'
+" Set this. Airline will handle the rest.
+let g:airline#extensions#ale#enabled = 1
+" Map keys to navigate between lines with errors and warnings.
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
+ 
+" Lint only after file save
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 1
+ 
+" Use quickfix instead of loclist for lint bugs
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
+let g:ale_open_list = 0 " autoopen list
+ 
+" ALE fixers
+" integration of prettier with eslint requires prettier-eslint and
+" prettier-eslint-cli packages
+" let g:ale_fixers = ['prettier-eslint']
+let g:ale_fixers = ['prettier', 'eslint']
+nmap <leader>p <Plug>(ale_fix)
+let g:ale_fix_on_save = 0
+" \w0rp/ale
+
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -184,8 +223,8 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " Theme
 syntax on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set termguicolors
-set background=dark
+" set termguicolors
+" set background=dark
 colorscheme onedark
 
 "NERDTree
