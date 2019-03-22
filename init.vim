@@ -146,13 +146,10 @@ let g:ackprg = 'ag --vimgrep'
 let g:fzf_layout = { 'down': '~40%' }
 let g:tsuquyomi_shortest_import_path = 1
 
-let g:ale_linters = {
-            \}
-
 " w0rp/ale
 " Limit linters used for JavaScript.
 let g:ale_linters = {
-\  'javascript': ['flow', 'eslint'],
+\  'javascript': ['eslint', 'flow'],
 \  'typescript': ['tslint'],
 \  'html': ['']
 \}
@@ -186,8 +183,9 @@ let g:ale_open_list = 0 " autoopen list
 let g:ale_fixers = ['prettier', 'eslint']
 nmap <leader>p <Plug>(ale_fix)
 let g:ale_fix_on_save = 0
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 " \w0rp/ale
-
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
