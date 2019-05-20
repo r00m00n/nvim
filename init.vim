@@ -36,6 +36,9 @@ Plug 'tpope/vim-surround'
 Plug 'trevordmiller/nova-vim'
 Plug 'w0rp/ale'
 Plug 'ayu-theme/ayu-vim'
+Plug 'brooth/far.vim'
+" Plug 'flowtype/vim-flow'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 Plug 'pelodelfuego/vim-swoop'
 
@@ -148,15 +151,15 @@ let g:tsuquyomi_shortest_import_path = 1
 
 " w0rp/ale
 " Limit linters used for JavaScript.
+" 'javascript': ['eslint', 'flow'],
 let g:ale_linters = {
-\  'javascript': ['eslint', 'flow'],
-\  'typescript': ['tslint'],
+\  'javascript': ['eslint'],
 \  'html': ['']
 \}
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
-let g:ale_sign_error = 'X' " could use emoji
-let g:ale_sign_warning = '?' " could use emoji
+let g:ale_sign_error = '❎' " could use emoji
+let g:ale_sign_warning = '✳️' " could use emoji
 let g:ale_statusline_format = ['X %d', '? %d', '']
 " %linter% is the name of the linter that provided the message
 " %s is the error or warning message
@@ -184,9 +187,8 @@ let g:ale_fixers = ['prettier', 'eslint']
 nmap <leader>p <Plug>(ale_fix)
 let g:ale_fix_on_save = 0
 let g:prettier#autoformat = 0
+let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-" \w0rp/ale
-
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 0
@@ -223,7 +225,7 @@ syntax on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " set termguicolors
 " set background=dark
-colorscheme onedark
+colorscheme Atelier_ForestDark
 
 "NERDTree
 " How can I close vim if the only window left open is a NERDTree?
